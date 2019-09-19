@@ -37,6 +37,19 @@ module FakeCreditCardApiGem
     end
   end
 
+  def self.check_amount(number:, code:, amount:)
+    api_path = CHECK_PATH
+    url = "http://#{configuration.host}:#{configuration.port}#{api_path}"
+    query = { number: number, code: code, amount: amount }
+    headers = header(configuration.api_key)
+    begin
+      response = HTTParty.get(url, query: query, headers: headers)
+      body = JSON.parse(response.body)
+    rescue Errno::ECONNREFUSED
+      body = { message: 'error connecting, API server seems down' }
+    end
+  end
+
   def self.index
     api_path = CREDIT_CARDS_PATH
     url = "http://#{configuration.host}:#{configuration.port}#{api_path}"
