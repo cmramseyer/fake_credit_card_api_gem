@@ -65,7 +65,7 @@ module FakeCreditCardApiGem
 
   def self.make_a_payment(number:, code:, amount:)
     check_response = self.check_amount(number: number, code: code, amount: amount)
-    return checker_response unless checker_response["message"] == 'valid'
+    return check_response unless check_response["message"] == 'valid'
     credit_card_id = check_response["id"]
 
     url = "http://#{configuration.host}:#{configuration.port}/credit_cards/#{credit_card_id}/payments"
