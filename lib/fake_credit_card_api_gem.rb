@@ -64,7 +64,7 @@ module FakeCreditCardApiGem
   end
 
   def self.make_a_payment(number:, code:, amount:)
-    check_response = self.check_amount(number: number, code: code, amount: amunt)
+    check_response = self.check_amount(number: number, code: code, amount: amount)
     return checker_response unless checker_response["message"] == 'valid'
     credit_card_id = check_response["id"]
 
