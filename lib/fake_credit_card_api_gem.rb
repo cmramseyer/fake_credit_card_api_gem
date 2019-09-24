@@ -63,6 +63,18 @@ module FakeCreditCardApiGem
     end
   end
 
+  def self.make_a_payment(credit_card_id:, amount:)
+    url = "http://#{configuration.host}:#{configuration.port}/credit_cards/#{credit_card_id}/payments"
+    query = { amount: amount }
+    headers = header(configuration.api_key)
+    begin
+      response = HTTParty.post(url, query: query, headers: headers)
+      body = JSON.parse(response.body)
+    rescue Errno::ECONNREFUSED
+      body = { message: 'error connecting, API server seems down' }
+    end
+  end
+
   def self.header(api_key)
     {
       'Authorization'=>"Bearer #{api_key}",
