@@ -1,4 +1,4 @@
-module FakeCreditCardApiGem
-  class Railtie < ::Rails::Railtie
-  end
-end
+#module FakeCreditCardApiGem
+#  class Railtie < ::Rails::Railtie
+#  end
+#end

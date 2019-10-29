@@ -1,4 +1,4 @@
-require "fake_credit_card_api_gem/railtie"
+#require "fake_credit_card_api_gem/railtie"
 require "httparty"
 require "json"
 

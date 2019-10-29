@@ -14,19 +14,19 @@ module FakeCreditCardApiGem
     def checker(number:, code:)
       url = checker_end_point
       query = { number: number, code: code }
-      request(url, query)
+      request(:get, url, query)
     end
 
     def check_amount(number:, code:, amount:)
       url = checker_end_point
       query = { number: number, code: code, amount: amount }
-      request(url, query)
+      request(:get, url, query)
     end
 
     def index
       url = credit_cards_end_point
       query = {}
-      request(url, query)
+      request(:get, url, query)
     end
 
     def make_a_payment(number:, code:, amount:)
@@ -37,7 +37,7 @@ module FakeCreditCardApiGem
 
       url = make_a_payment_end_point(credit_card_id)
       query = { amount: amount }
-      request(url, query)
+      request(:post, url, query)
     end
 
     private
@@ -58,9 +58,9 @@ module FakeCreditCardApiGem
       "/credit_cards/#{credit_card_id}/payments"
     end
 
-    def request(url, query)
+    def request(_method, url, query)
       begin
-        response = HTTParty.get(url, query: query, headers: request_header)
+        response = HTTParty.send(_method, url, query: query, headers: request_header)
         body = JSON.parse(response.body)
       rescue Errno::ECONNREFUSED
         body = { message: 'error connecting, API server seems down' }
