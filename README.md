@@ -1,7 +1,7 @@
 # FakeCreditCardApiGem
 
 ## Installation
-`gem 'fake_credit_card_api_gem'`  
+`gem 'fake_credit_card_api_gem', git: 'git@github.com:cmramseyer/fake_credit_card_api_gem.git'`  
   
 Create `config/initializers/fake_credit_card_api_gem.rb` and add  
 ```ruby
